@@ -29,7 +29,7 @@ module Griddler::EmailParser
       ""
     else
       remove_reply_portion(body)
-        .split(/[\r]*\n/)
+        .to_s.split(/[\r]*\n/)
         .reject do |line|
           line =~ /^[[:space:]]+>/ ||
             line =~ /^[[:space:]]*Sent from my /
@@ -60,12 +60,12 @@ module Griddler::EmailParser
   end
 
   def self.extract_email_address(full_address)
-    full_address.split('<').last.delete('>').strip
+    full_address.to_s.split('<').last.delete('>').strip
   end
 
   def self.extract_name(full_address)
     full_address = full_address.strip
-    name = full_address.split('<').first.strip
+    name = full_address.to_s.split('<').first.strip
     if name.present? && name != full_address
       name
     end
@@ -89,7 +89,7 @@ module Griddler::EmailParser
 
   def self.remove_reply_portion(body)
     regex_split_points.inject(body) do |result, split_point|
-      result.split(split_point).first || ""
+      result.to_s.split(split_point).first || ""
     end
   end
 end
