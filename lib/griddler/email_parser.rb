@@ -63,7 +63,7 @@ module Griddler::EmailParser
     begin
       full_address.to_s.split('<').last.to_s.delete('>').strip
     rescue
-      "errorinemail@erroraddress.eu" #to check when
+      "error17#{full_address}" #to check when
     end
   end
 
