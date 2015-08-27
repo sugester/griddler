@@ -34,8 +34,7 @@ module Griddler::EmailParser
           line =~ /^[[:space:]]+>/ ||
             line =~ /^[[:space:]]*Sent from my /
         end.
-        join("\n").
-        strip
+        join("\n").to_s.strip
     end
   end
 
@@ -61,7 +60,7 @@ module Griddler::EmailParser
 
   def self.extract_email_address(full_address)
     begin
-      full_address.to_s.split('<').last.to_s.delete('>').strip
+      full_address.to_s.split('<').last.to_s.delete('>').to_s.strip
     rescue
       "error17#{full_address}" #to check when
     end
@@ -69,7 +68,7 @@ module Griddler::EmailParser
 
   def self.extract_name(full_address)
     full_address = full_address.strip
-    name = full_address.to_s.split('<').first.strip
+    name = full_address.to_s.split('<').first.to_s.strip
     if name.present? && name != full_address
       name
     end
