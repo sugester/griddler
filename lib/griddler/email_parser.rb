@@ -60,10 +60,10 @@ module Griddler::EmailParser
   end
 
   def self.extract_email_address(full_address)
-    if full_address == nil
-      "errorinemail@erroraddress.eu" #to check when
-    else
+    begin
       full_address.to_s.split('<').last.to_s.delete('>').strip
+    rescue
+      "errorinemail@erroraddress.eu" #to check when
     end
   end
 
