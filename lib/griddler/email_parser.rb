@@ -59,11 +59,7 @@ module Griddler::EmailParser
   end
 
   def self.extract_email_address(full_address)
-    begin
-      full_address.to_s.split('<').last.to_s.delete('>').to_s.strip
-    rescue
-      "error17#{full_address}" #to check when
-    end
+    full_address.to_s.split('<').last.to_s.delete('>').to_s.strip
   end
 
   def self.extract_name(full_address)
